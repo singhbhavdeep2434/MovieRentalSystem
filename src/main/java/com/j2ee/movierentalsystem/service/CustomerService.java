@@ -5,6 +5,7 @@ import com.j2ee.movierentalsystem.model.Customer;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -14,9 +15,9 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer registerCustomer(Customer customer) {
+    public void registerCustomer(Customer customer) {
         customer.setRegisteredDate(LocalDate.now());
-        return customerRepository.save(customer);
+        customerRepository.save(customer);
     }
 
     public Customer getCustomerByEmail(String email) {
@@ -26,5 +27,9 @@ public class CustomerService {
     public Customer getCustomerById(int id) {
 
         return customerRepository.findById(id);
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerRepository.findAll();
     }
 }
